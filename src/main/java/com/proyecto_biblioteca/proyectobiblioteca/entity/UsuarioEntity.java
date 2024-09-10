@@ -10,7 +10,10 @@ import jakarta.persistence.Table;
 public class UsuarioEntity {
     @Id
     @Column(name = "id")
-    private String idUsuario;
+    private String idUs;
+
+    @Column(name = "id_tipoUsuario")
+    private Integer tipoUs;
 
     @Column(name = "nombre_us")
     private String nombreUs;
@@ -25,13 +28,10 @@ public class UsuarioEntity {
     private String dniUs;
 
     @Column(name = "estado_us")
-    private String estadoUs;
+    private Boolean estadoUs;
 
     @Column(name = "pass_us")
     private String passUs;
-
-    @Column(name = "id_tipoUsuario")
-    private String tipoUs;
 
     @Column(name = "reestablecer_us")
     private Boolean reesUs;
