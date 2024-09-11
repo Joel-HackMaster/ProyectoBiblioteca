@@ -27,4 +27,8 @@ public class UsuarioService {
         }
         return usuariosDTO;
     }
+
+    public void crearAlumnos(int tipo, String nombres, String apellidos, String email, String dni, String password ){
+        usuarioRepository.crearAlumno(tipo, nombres, apellidos, email, dni, password);
+    }
 }

@@ -5,7 +5,25 @@ public class UsuarioDTO {
     private String nombres;
     private String apellidos;
     private String email;
+    private String clave;
+    private String image;
     private String dni;
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getIdUsuario() {
         return idUsuario;
