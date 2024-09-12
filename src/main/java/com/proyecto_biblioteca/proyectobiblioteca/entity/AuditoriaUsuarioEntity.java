@@ -4,16 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "tt_auditoriausuario")
-public class auditoriaUsuarioEntity {
+public class AuditoriaUsuarioEntity {
     @Id
     @Column(name = "id")
-    private Integer idAuditoria;
+    private Integer idAuditoriaUsuario;
 
     @Column(name = "id_usuario")
     private String idUsuario;
