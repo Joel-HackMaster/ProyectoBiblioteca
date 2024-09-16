@@ -1,8 +1,6 @@
 package com.proyecto_biblioteca.proyectobiblioteca.controller;
 
 import com.proyecto_biblioteca.proyectobiblioteca.dto.UsuarioDTO;
-import com.proyecto_biblioteca.proyectobiblioteca.entity.UsuarioEntity;
-import com.proyecto_biblioteca.proyectobiblioteca.repository.UsuarioRepository;
 import com.proyecto_biblioteca.proyectobiblioteca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +18,6 @@ public class UsuarioController {
     public String usuarios(Model model) {
         List<UsuarioDTO> alumnos = usuarioService.obtenerAlumnos();
         model.addAttribute("alumnos", alumnos);
-        return "listadoAlumnos";
+        return "administracion/listadoAlumnos";
     }
 }
