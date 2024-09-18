@@ -12,7 +12,7 @@ import java.time.LocalTime;
 public class AuditoriaUsuarioEntity {
     @Id
     @Column(name = "id")
-    private Integer idAuditoriaUsuario;
+    private Integer idAuditoria;
 
     @Column(name = "id_usuario")
     private String idUsuario;
