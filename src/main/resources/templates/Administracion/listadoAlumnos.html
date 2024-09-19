@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMqw4mUhTtLMAk5RHli/Sb8NKCfh1yy+rOGVgO" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/DataTablesStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"  integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.tailwindcss.css"/>
     <title>Listado Alumnos</title>
 </head>
 <body>
@@ -13,14 +15,14 @@
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <table id="tablaUsuario" class="display min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
               <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <div class="flex items-center gap-x-3">
                   <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700">
                   <button class="flex items-center gap-x-2">
-                    <span>Codigos</span>
+                    <span>Codigo</span>
                     <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
                       <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
@@ -31,15 +33,15 @@
               </th>
 
               <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Estado
-              </th>
-
-              <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 Usuario
               </th>
 
+              <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                Accion
+              </th>
+
               <th scope="col" class="relative text-sm font-normal text-left rtl:text-right text-gray-500 py-3.5 px-4 dark:text-gray-400">
-                Acciones
+                Estado
               </th>
             </tr>
             </thead>
@@ -48,25 +50,6 @@
                   <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                     <div class="inline-flex items-center gap-x-3">
                       <span th:text="'#' + ${alumno.idUsuario}"></span>
-                    </div>
-                  </td>
-                  <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                    <div th:if="${alumno.status}">
-                      <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <h2 class="text-sm font-normal">Activo</h2>
-                      </div>
-                    </div>
-                    <div th:unless="${alumno.status}">
-                      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-
-                        <h2 class="text-sm font-normal">Retirado</h2>
-                      </div>
                     </div>
                   </td>
                   <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
@@ -81,7 +64,7 @@
                   <td class="px-4 py-4 text-base whitespace-nowrap">
                     <div class="flex items-center gap-x-6">
                       <div class="relative group">
-                        <button th:type="button" class="text-gray-500 transition-colors duration-200 hover:text-green-500" onclick="console.log('GAAAA')" aria-label="Informacion">
+                        <button th:type="button" id="infoBtn" class="text-gray-500 transition-colors duration-200 hover:text-green-500" aria-label="Informacion">
                           <i class="fa-solid fa-circle-info"></i>
                         </button>
                         <span class="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100">
@@ -105,6 +88,31 @@
                         </span>
                       </div>
                     </div>
+                    <div class="expansible" style="display:none;"
+                         th:data-id="${alumno.idUsuario}"
+                         th:data-nombres="${alumno.nombres}"
+                         th:data-apellidos="${alumno.apellidos}"
+                         th:data-email="${alumno.email}"
+                         th:data-image="${alumno.image}">
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                    <div th:if="${alumno.status}">
+                      <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h2 class="text-sm font-normal">Activo</h2>
+                      </div>
+                    </div>
+                    <div th:unless="${alumno.status}">
+                      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h2 class="text-sm font-normal">Retirado</h2>
+                      </div>
+                    </div>
                   </td>
                 </tr>
             </tbody>
@@ -113,46 +121,72 @@
       </div>
     </div>
   </div>
-
-  <div class="flex items-center justify-between mt-6">
-    <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-      </svg>
-
-      <span>
-                previous
-            </span>
-    </a>
-
-    <div class="items-center hidden md:flex gap-x-3">
-      <a href="#" class="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-      <a href="#" class="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
-    </div>
-
-    <a href="#" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-            <span>
-                Next
-            </span>
-
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-      </svg>
-    </a>
-  </div>
 </section>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/fa1c4cdd19.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/2.1.6/js/dataTables.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/2.1.6/js/dataTables.tailwindcss.js" crossorigin="anonymous"></script>
   <script>
-    function toggleAccordion(id) {
-      console.log("Entreda: "+id)
-      const accordion = document.getElementById('accordion-'+id);
-      accordion.classList.toggle('hidden');
-    }
+    $(document).ready(function() {
+      var table = $('#tablaUsuario').DataTable({
+        "language": {
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "zeroRecords": "No se encontraron resultados",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+          "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+          "infoFiltered": "(filtrado de _MAX_ registros totales)",
+          "search": "Buscar por nombre:"
+        }
+      });
+
+      $('.dt-search input').addClass('')
+
+      function format(d){
+
+        var id = d.data('id'); /***Accede a los datos adicionales desde los atributos data-* de Thymeleaf***/
+        var nombres = d.data('nombres');
+        var apellidos = d.data('apellidos');
+        var email = d.data('email');
+        var image = d.data('image');
+
+        return  `
+          <div class="slider m-10 text-gray-200">
+            <p><strong>Id:</strong> ${id} </p>
+            <p class="flex items-center mt-5"><strong>Foto:</strong><img class="object-cover ml-5 w-8 h-8 rounded-full" src=${image} alt=""></p>
+            <p class="mt-5"><strong>Nombres:</strong> ${nombres}</p>
+            <p class="mt-5"><strong>Apellidos:</strong> ${apellidos}</p>
+            <p class="mt-5"><strong>Email:</strong> ${email}</p>
+          </div>
+                `;
+      }
+
+      $('#tablaUsuario tbody').on('click', 'td #infoBtn', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+        var btn = $(this);
+        var expansible = tr.find('.expansible');
+
+        console.log(row.data());
+        //Si la fila esta abierta, la cierra
+        if (row.child.isShown()) {
+          $('div.slider', row.child()).slideUp(function () {
+            row.child.hide();
+            tr.removeClass('shown');
+          });
+          btn.removeClass('text-green-500')
+          btn.addClass('text-gray-500')
+        }
+        else {
+          row.child('<div class="slider" style="display: none;">' + format(expansible) + '</div>').show();
+
+          $('div.slider', row.child()).slideDown(function () {
+            tr.addClass('shown');
+          });
+          btn.addClass('text-green-500')
+          btn.removeClass('text-gray-500')
+        }
+      });
+    });
   </script>
 </body>
 </html>
