@@ -1,0 +1,22 @@
+/* Cambiar el color de fondo de la tabla */
+#tablaUsuario_wrapper {
+    background-color: #1b1b2f; /* Color de fondo personalizado */
+    color: white; /* Color del texto */
+}
+
+/* Estilo para la caja de selección de cantidad de entradas */
+#dt-length-0{
+    background-color: #fff;
+    color: #333;
+}
+
+/* Cambiar el color de la barra de búsqueda */
+.dt-search input{
+    background: #fff !important;
+    color: #333 !important;
+}
+
+/* Cambiar el estilo del pie de la tabla */
+.dataTables_info, .dataTables_paginate {
+    color: #fff;
+}
