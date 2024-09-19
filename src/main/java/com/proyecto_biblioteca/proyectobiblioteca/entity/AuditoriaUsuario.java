@@ -9,11 +9,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "tt_auditoriausuario", schema = "public")
-<<<<<<< HEAD:src/main/java/com/proyecto_biblioteca/proyectobiblioteca/entity/auditoriaUsuarioEntity.java
-public class auditoriaUsuarioEntity {
-=======
 public class AuditoriaUsuario {
->>>>>>> dev-edwin:src/main/java/com/proyecto_biblioteca/proyectobiblioteca/entity/AuditoriaUsuario.java
     @Id
     @Column(name = "id")
     private Integer idAuditoria;
