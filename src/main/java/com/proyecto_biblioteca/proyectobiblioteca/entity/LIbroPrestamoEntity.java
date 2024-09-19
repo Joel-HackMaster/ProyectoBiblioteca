@@ -1,13 +1,13 @@
 package com.proyecto_biblioteca.proyectobiblioteca.entity;
 
-public class LIbroPrestamo {
+public class LIbroPrestamoEntity {
     private String id;
     private String idAtencion;
     private String hora;
     private String estado;
     private int cantidad;
 
-    public LIbroPrestamo(String id) {
+    public LIbroPrestamoEntity(String id) {
         this.id = id;
     }
 

@@ -9,7 +9,7 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "tt_auditoriausuario", schema = "public")
-public class AuditoriaUsuario {
+public class AuditoriaUsuarioEntity {
     @Id
     @Column(name = "id")
     private Integer idAuditoria;

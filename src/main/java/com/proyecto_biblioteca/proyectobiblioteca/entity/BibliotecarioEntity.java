@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tt_bibliotecario")
-public class Bibliotecario {
+public class BibliotecarioEntity {
     @Id
     @Column(name = "id")
     private String idBibliotecario;
