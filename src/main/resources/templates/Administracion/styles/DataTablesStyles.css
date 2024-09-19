@@ -5,15 +5,15 @@
 }
 
 /* Estilo para la caja de selección de cantidad de entradas */
-.dataTables_length select {
-    background-color: #333;
-    color: #fff;
+#dt-length-0{
+    background-color: #fff;
+    color: #333;
 }
 
 /* Cambiar el color de la barra de búsqueda */
-.dataTables_filter input {
-    background-color: #333;
-    color: #fff;
+.dt-search input{
+    background: #fff !important;
+    color: #333 !important;
 }
 
 /* Cambiar el estilo del pie de la tabla */
