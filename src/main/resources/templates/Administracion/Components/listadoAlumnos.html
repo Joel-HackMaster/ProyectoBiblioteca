@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles/DataTablesStyles.css">
+    <link rel="stylesheet" href="../static/DataTablesStyles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"  integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.tailwindcss.css"/>
     <title>Listado Alumnos</title>
@@ -14,7 +14,7 @@
   <div class="flex flex-col">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-        <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+        <div class="overflow-hidden border border-[#343b4f] font-mono rounded-lg bg-[#212c4d]">
           <table id="tablaUsuario" class="display min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
@@ -45,7 +45,7 @@
               </th>
             </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+            <tbody class="bg-white font-mono divide-y divide-[#343b4f] dark:divide-[#343b4f] dark:bg-[#212c4d]">
                 <tr  th:each="alumno : ${alumnos}">
                   <td class="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
                     <div class="inline-flex items-center gap-x-3">
@@ -129,21 +129,27 @@
   <script>
     $(document).ready(function() {
       var table = $('#tablaUsuario').DataTable({
+        "pageLength": 10,
+        "lengthChange": false, // **Eliminamos el selector
+        "info": false,
         "language": {
-          "lengthMenu": "Mostrar _MENU_ registros por página",
+          //"lengthMenu": "Mostrar _MENU_ registros por página", //**Eliminamos el texto
           "zeroRecords": "No se encontraron resultados",
-          "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+          //"info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
           "infoEmpty": "Mostrando 0 a 0 de 0 registros",
           "infoFiltered": "(filtrado de _MAX_ registros totales)",
           "search": "Buscar por nombre:"
         }
       });
 
-      $('.dt-search input').addClass('')
+      $('.dt-search label').addClass("text-base font-medium text-white");
+      $('.dt-search input').removeClass();
+      $('.dt-search input').attr('placeholder', 'Ingresa un nombre');
+      $('.dt-search input').addClass("placeholder:text-gray-400 bg-[#37446b] text-[#d1dbf9] mx-2 py-1.5 rounded-md border-0 px-7 ring-2 ring-inset ring-[#d1dbf9] focus:ring-2 focus:ring-inset focus:ring-indigo-600  sm:text-sm sm:leading-6");
 
       function format(d){
 
-        var id = d.data('id'); /***Accede a los datos adicionales desde los atributos data-* de Thymeleaf***/
+        var id = d.data('id'); /* **Accede a los datos adicionales desde los atributos data-* de Thymeleaf** */
         var nombres = d.data('nombres');
         var apellidos = d.data('apellidos');
         var email = d.data('email');

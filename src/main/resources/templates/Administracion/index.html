@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Biblioteca Municipal</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sideNav.css}">
+    <link rel="icon" type="image" href="https://firebasestorage.googleapis.com/v0/b/portafolio-39d79.appspot.com/o/Biblioteca%2Flogo.png?alt=media&token=94498343-3604-4aba-bb00-d7121f488802">
+    <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 <body>
+    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
+        <div class="flex h-screen antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light">
+            <div x-ref="loading" class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker">
+                Loading.....
+            </div>
 
+            <aside th:include="Administracion/Components/sidebar :: sidebar" class="flex-shrink-0 hidden w-64 bg-white border-r dark:border-primary-darker dark:bg-darker md:block"></aside>
+            <div th:include="Administracion/Components/nav :: navbar" class="flex-1 h-full overflow-x-hidden overflow-y-auto"></div>
+
+            <!-- Panels -->
+
+            <!-- Settings Panel -->
+            <!-- Backdrop -->
+            <div x-transition:enter="transition duration-300 ease-in-out"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition duration-300 ease-in-out"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 x-show="isSettingsPanelOpen"
+                 @click="isSettingsPanelOpen = false"
+                 class="fixed inset-0 z-10 bg-primary-darker"
+                 style="opacity: 0.5"
+                 aria-hidden="true"
+            ></div>
+            <!--Panel-->
+            <section th:include="Administracion/Components/settings :: herramientas1"></section>
+
+            <!-- Notification panel -->
+            <!-- Backdrop -->
+            <div x-transition:enter="transition duration-300 ease-in-out"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition duration-300 ease-in-out"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 x-show="isNotificationsPanelOpen"
+                 @click="isNotificationsPanelOpen = false"
+                 class="fixed inset-0 z-10 bg-primary-darker"
+                 style="opacity: 0.5"
+                 aria-hidden="true"
+            ></div>
+            <!--Panel-->
+            <section th:include="Administracion/Components/settings :: herramientas2"></section>
+
+            <!-- Search panel -->
+            <!-- Backdrop -->
+            <div x-transition:enter="transition duration-300 ease-in-out"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition duration-300 ease-in-out"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 x-show="isSearchPanelOpen"
+                 @click="isSearchPanelOpen = false"
+                 class="fixed inset-0 z-10 bg-primary-darker"
+                 style="opacity: 0.5"
+                 aria-hidden="true"
+            ></div>
+            <!--Panel-->
+            <section th:include="Administracion/Components/settings :: herramientas3"></section>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" th:src="@{/js/sideBar.js}" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}" crossorigin="anonymous"></script>
 </body>
 </html>
