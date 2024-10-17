@@ -1,19 +1,28 @@
 package com.proyecto_biblioteca.proyectobiblioteca.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tt_usuario", schema = "public")
-public class UsuarioEntity {
+public class UsuarioEntity implements UserDetails {
     @Id
     @Column(name = "id")
     private String idUs;
 
-    @Column(name = "id_tipoUsuario")
-    private Integer tipoUs;
+    @ManyToOne
+    @JoinColumn(name = "id_tipousuario", nullable = false)
+    private TipoUsuarioEntity tipoUs;
 
     @Column(name = "nombre_us")
     private String nombreUs;
@@ -42,91 +51,38 @@ public class UsuarioEntity {
     @Column(name = "en_linea")
     private Boolean enLinea;
 
-    public String getIdUs() {
-        return idUs;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(tipoUs.getDescrTipoUsuario()));
     }
 
-    public void setIdUs(String idUs) {
-        this.idUs = idUs;
-    }
-
-    public Integer getTipoUs() {
-        return tipoUs;
-    }
-
-    public void setTipoUs(Integer tipoUs) {
-        this.tipoUs = tipoUs;
-    }
-
-    public String getNombreUs() {
-        return nombreUs;
-    }
-
-    public void setNombreUs(String nombreUs) {
-        this.nombreUs = nombreUs;
-    }
-
-    public String getApellidosUs() {
-        return apellidosUs;
-    }
-
-    public void setApellidosUs(String apellidosUs) {
-        this.apellidosUs = apellidosUs;
-    }
-
-    public String getEmailUs() {
-        return emailUs;
-    }
-
-    public void setEmailUs(String emailUs) {
-        this.emailUs = emailUs;
-    }
-
-    public String getDniUs() {
-        return dniUs;
-    }
-
-    public void setDniUs(String dniUs) {
-        this.dniUs = dniUs;
-    }
-
-    public Boolean getEstadoUs() {
-        return estadoUs;
-    }
-
-    public void setEstadoUs(Boolean estadoUs) {
-        this.estadoUs = estadoUs;
-    }
-
-    public String getImageUs() {
-        return imageUs;
-    }
-
-    public void setImageUs(String imageUs) {
-        this.imageUs = imageUs;
-    }
-
-    public String getPassUs() {
+    @Override
+    public String getPassword() {
         return passUs;
     }
 
-    public void setPassUs(String passUs) {
-        this.passUs = passUs;
+    @Override
+    public String getUsername() {
+        return emailUs;
     }
 
-    public Boolean getReesUs() {
-        return reesUs;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setReesUs(Boolean reesUs) {
-        this.reesUs = reesUs;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public Boolean getEnLinea() {
-        return enLinea;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setEnLinea(Boolean enLinea) {
-        this.enLinea = enLinea;
+    @Override
+    public boolean isEnabled() {
+        return estadoUs;
     }
 }
