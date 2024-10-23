@@ -1,9 +1,9 @@
 package com.proyecto_biblioteca.proyectobiblioteca.repository;
 
-import com.proyecto_biblioteca.proyectobiblioteca.entity.UsuarioEntity;
-import com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository.TipoUsuarioJpaRepository;
-import com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository.UsuarioJpaRepository;
-import com.proyecto_biblioteca.proyectobiblioteca.repository.contrato.IAuthRepository;
+import com.proyecto_biblioteca.proyectobiblioteca.entity.LibroEntity;
+import com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository.GeneroLibroJpaRepository;
+import com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository.LibroJpaRepository;
+import com.proyecto_biblioteca.proyectobiblioteca.repository.contrato.IGenericRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,42 +15,43 @@ import java.util.Optional;
 public class LibroRepository implements IGenericRepository<LibroEntity, String> {
 
     @Autowired
-    private UsuarioJpaRepository usuarioJpaRepository;
+    private LibroJpaRepository libroJpaRepository;
 
     @Autowired
-    private TipoUsuarioJpaRepository tipoUsuarioJpaRepository;
+    private GeneroLibroJpaRepository generoLibroJpaRepository;
+
 
     @Override
-    public List<UsuarioEntity> obtenerTodos() {
+    public List<LibroEntity> obtenerTodos() {
         return null;
     }
 
     @Override
-    public List<UsuarioEntity> obtenerPorTipo(int tipo) {
-        List<UsuarioEntity> universitarios= new ArrayList<>();
-        List<Object[]> resultados = usuarioJpaRepository.obtenerUsuarios(tipo);
+    public List<LibroEntity> obtenerPorGenero(int genero) {
+        List<LibroEntity> libros = new ArrayList<>();
+        List<Object[]> resultados = libroJpaRepository.obtenerLibro(genero);
         for(Object[] resultado : resultados){
-            UsuarioEntity usuario = new UsuarioEntity();
-            usuario.setIdUs((String)resultado[0]);
-            usuario.setNombreUs((String)resultado[1]);
-            usuario.setApellidosUs((String)resultado[2]);
-            usuario.setEmailUs((String)resultado[3]);
-            usuario.setImageUs((String)resultado[4]);
-            usuario.setDniUs ((String)resultado[5]);
-            usuario.setEstadoUs( (Boolean)resultado[6]);
-            universitarios.add(usuario);
+            LibroEntity libro = new LibroEntity();
+            // libro.setIdUs((String)resultado[0]);
+            // libro.setNombreUs((String)resultado[1]);
+            // libro.setApellidosUs((String)resultado[2]);
+            // libro.setEmailUs((String)resultado[3]);
+            // libro.setImageUs((String)resultado[4]);
+            // libro.setDniUs ((String)resultado[5]);
+            // libro.setEstadoUs( (Boolean)resultado[6]);
+            libros.add(libro);
         }
-        return universitarios;
+        return libros;
     }
 
     @Override
-    public UsuarioEntity obtenerPorId(String id) {
-        return usuarioJpaRepository.obtenerUsuarioID(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    public LibroEntity obtenerPorId(String id) {
+        return libroJpaRepository.obtenerLibroID(id).orElseThrow(() -> new RuntimeException("Libro no encontrado"));
     }
 
     @Override
-    public UsuarioEntity guardarModelo(UsuarioEntity modelo) {
-        return usuarioJpaRepository.save(modelo);
+    public LibroEntity guardarModelo(LibroEntity modelo) {
+        return libroJpaRepository.save(modelo);
     }
 
     @Override
@@ -59,12 +60,12 @@ public class LibroRepository implements IGenericRepository<LibroEntity, String> 
     }
 
     @Override
-    public Optional<UsuarioEntity> obtenerPorEmail(String email) {
-        return usuarioJpaRepository.findByEmailUs(email);
+    public Optional<LibroEntity> obtenerPorEmail(String email) {
+        return libroJpaRepository.findByEmailUs(email);
     }
 
     @Override
-    public UsuarioEntity guardarUsuario(UsuarioEntity modelo, int tipo) {
+    public LibroEntity guardarLibro(LibroEntity modelo, int genero) {
         Object[] objectUser = (Object[]) usuarioJpaRepository.crearUsuario(tipo, modelo.getNombreUs(), modelo.getApellidosUs(), modelo.getEmailUs(), modelo.getDniUs(), modelo.getImageUs(),modelo.getPassUs());
         UsuarioEntity usuario = new UsuarioEntity();
         usuario.setIdUs((String)objectUser[0]);
