@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface ILibroRepository<T, ID> extends IGenericRepository<T, ID> {
     Optional<T> obtenerPorEmail(ID email);
-    T guardarUsuario(T modelo, int tipo);
+    T guardarLibro(T modelo, int tipo);
 }
