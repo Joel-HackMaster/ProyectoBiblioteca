@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class LibroRepository implements IAuthRepository<LibroEntity, String> {
+public class LibroRepository implements IGenericRepository<LibroEntity, String> {
 
     @Autowired
     private UsuarioJpaRepository usuarioJpaRepository;
