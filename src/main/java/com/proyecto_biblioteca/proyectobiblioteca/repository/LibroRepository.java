@@ -29,10 +29,10 @@ public class LibroRepository implements IGenericRepository<LibroEntity, String> 
     @Override
     public List<LibroEntity> obtenerPorGenero(int genero) {
         List<LibroEntity> libros = new ArrayList<>();
-        List<Object[]> resultados = libroJpaRepository.obtenerLibro(genero);
+        List<Object[]> resultados = libroJpaRepository.obtenerLibros(genero);
         for(Object[] resultado : resultados){
             LibroEntity libro = new LibroEntity();
-            // libro.setIdUs((String)resultado[0]);
+            libro.setIdUs((String)resultado[0]);
             // libro.setNombreUs((String)resultado[1]);
             // libro.setApellidosUs((String)resultado[2]);
             // libro.setEmailUs((String)resultado[3]);

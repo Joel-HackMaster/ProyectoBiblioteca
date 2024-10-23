@@ -1,10 +1,13 @@
 package com.proyecto_biblioteca.proyectobiblioteca.entity;
 
+import lombok.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tt_libro")
 public class LibroEntity {
