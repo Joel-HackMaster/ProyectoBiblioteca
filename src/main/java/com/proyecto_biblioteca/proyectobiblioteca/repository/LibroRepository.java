@@ -12,39 +12,39 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class LibroRepoditory implements IAuthRepository<LibroEntity, String>  {
+public class LibroRepository implements IAuthRepository<UsuarioEntity, String> {
 
     @Autowired
-    private LibroJpaRepository usuarioJpaRepository;
+    private UsuarioJpaRepository usuarioJpaRepository;
 
     @Autowired
     private TipoUsuarioJpaRepository tipoUsuarioJpaRepository;
 
     @Override
-    public List<LibroEntity> obtenerTodos() {
+    public List<UsuarioEntity> obtenerTodos() {
         return null;
     }
 
     @Override
-    public List<LibroEntity> obtenerPorTipo(int tipo) {
-        List<LibroEntity> universitarios= new ArrayList<>();
+    public List<UsuarioEntity> obtenerPorTipo(int tipo) {
+        List<UsuarioEntity> universitarios= new ArrayList<>();
         List<Object[]> resultados = usuarioJpaRepository.obtenerUsuarios(tipo);
         for(Object[] resultado : resultados){
-            LibroEntity libro = new LibroEntity();
-            libro.setIdUs((String)resultado[0]);
-            libro.setNombreUs((String)resultado[1]);
-            libro.setApellidosUs((String)resultado[2]);
-            libro.setEmailUs((String)resultado[3]);
-            libro.setImageUs((String)resultado[4]);
-            libro.setDniUs ((String)resultado[5]);
-            libro.setEstadoUs( (Boolean)resultado[6]);
+            UsuarioEntity usuario = new UsuarioEntity();
+            usuario.setIdUs((String)resultado[0]);
+            usuario.setNombreUs((String)resultado[1]);
+            usuario.setApellidosUs((String)resultado[2]);
+            usuario.setEmailUs((String)resultado[3]);
+            usuario.setImageUs((String)resultado[4]);
+            usuario.setDniUs ((String)resultado[5]);
+            usuario.setEstadoUs( (Boolean)resultado[6]);
             universitarios.add(usuario);
         }
         return universitarios;
     }
 
     @Override
-    public LibroEntity obtenerPorId(String id) {
+    public UsuarioEntity obtenerPorId(String id) {
         return usuarioJpaRepository.obtenerUsuarioID(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
@@ -76,5 +76,43 @@ public class LibroRepoditory implements IAuthRepository<LibroEntity, String>  {
         usuario.setImageUs((String) objectUser[6]);
         return usuario;
     }
-
 }
+
+
+/*
+* @Override
+    public List<UsuarioDTO> obtenerTodos() {
+        List<UsuarioEntity> universitarios= new ArrayList<>();
+        List<Object[]> resultados = usuarioJpaRepository.obtenerAlumnos(2);
+
+        for(Object[] resultado : resultados){
+            UsuarioEntity usuario = new UsuarioEntity();
+            usuario.setIdUs((String) resultado[0]);
+            usuario.setNombreUs((String) resultado[1]);
+            usuario.setApellidosUs((String) resultado[2]);
+            usuarioDTO.setEmail((String) resultado[3]);
+            usuarioDTO.setImage( (String) resultado[4]);
+            usuarioDTO.setDni( (String) resultado[5]);
+            usuarioDTO.setStatus( (Boolean) resultado[6]);
+            usuariosDTO.add(usuarioDTO);
+        }
+
+
+        return universitarios;
+    }
+
+    @Override
+    public UsuarioEntity obtenerPorId(Long id) {
+        return null;
+    }
+
+    @Override
+    public UsuarioEntity guardarModelo(UsuarioEntity usuario) {
+        return null;
+    }
+
+    @Override
+    public boolean eliminarModelo(Long id) {
+        return false;
+    }
+* */
