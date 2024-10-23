@@ -1,7 +1,6 @@
 package com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository;
 
 import com.proyecto_biblioteca.proyectobiblioteca.entity.LibroEntity;
-import com.proyecto_biblioteca.proyectobiblioteca.entity.UsuarioEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,5 +20,5 @@ public interface LibroJpaRepository extends JpaRepository<LibroEntity, Long> {
     @Query(value = "SELECT * FROM obtenerlibroid(:id_libro)", nativeQuery = true)
     Optional<LibroEntity> obtenerLibroID(@Param("id_libro") String id_libro);
 
-    Optional<UsuarioEntity> findByNombreUs(String nombre);
+    Optional<LibroEntity> findByNombreUs(String nombre);
 }
