@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface LibroJpaRepository extends JpaRepository<LibroEntity, Long> {
     @Query(value = "SELECT * FROM obtenerlibros(:rol)", nativeQuery = true)
-    List<Object[]> obtenerLibrosLibros(@Param("rol") Integer rol);
+    List<Object[]> obtenerLibros(@Param("rol") Integer rol);
 
     @Transactional
     @Query(value = "SELECT * FROM agregarlibro(:tipo, :genero, :nombre)", nativeQuery = true)
