@@ -9,16 +9,16 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface LibroJpaRepository extends JpaRepository<UsuarioEntity, Long> {
-    @Query(value = "SELECT * FROM obtenerusuarios(:rol)", nativeQuery = true)
-    List<Object[]> obtenerUsuarios(@Param("rol") Integer rol);
+public interface LibroJpaRepository extends JpaRepository<LibroEntity, Long> {
+    @Query(value = "SELECT * FROM obtenerlibros(:rol)", nativeQuery = true)
+    List<Object[]> obtenerLibrosLibros(@Param("rol") Integer rol);
 
     @Transactional
-    @Query(value = "SELECT * FROM agregarusuario(:tipo, :nombre, :apellidos, :email, :dni, :image, :password)", nativeQuery = true)
-    Object crearUsuario(@Param("tipo") Integer tipo, @Param("nombre") String nombres, @Param("apellidos") String apellidos, @Param("email") String email, @Param("dni") String dni, @Param("image") String image,@Param("password") String password);
+    @Query(value = "SELECT * FROM agregarlibro(:tipo, :genero, :nombre)", nativeQuery = true)
+    Object crearLibro(@Param("tipo") Integer tipo, @Param("genero") String genero, @Param("nombre") String nombre);
 
-    @Query(value = "SELECT * FROM obtenerusuarioid(:id_usuario)", nativeQuery = true)
-    Optional<UsuarioEntity> obtenerUsuarioID(@Param("id_usuario") String id_usuario);
+    @Query(value = "SELECT * FROM obtenerlibroid(:id_libro)", nativeQuery = true)
+    Optional<LibroEntity> obtenerLibroID(@Param("id_libro") String id_libro);
 
-    Optional<UsuarioEntity> findByEmailUs(String email);
+    Optional<LibroEntity> findByEmailUs(String nombre);
 }
