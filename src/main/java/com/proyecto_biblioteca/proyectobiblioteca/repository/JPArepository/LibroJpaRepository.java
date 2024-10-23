@@ -1,5 +1,6 @@
 package com.proyecto_biblioteca.proyectobiblioteca.repository.JPArepository;
 
+import com.proyecto_biblioteca.proyectobiblioteca.entity.LibroEntity;
 import com.proyecto_biblioteca.proyectobiblioteca.entity.UsuarioEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

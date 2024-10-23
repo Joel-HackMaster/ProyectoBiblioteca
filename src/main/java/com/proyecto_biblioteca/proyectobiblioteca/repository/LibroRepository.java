@@ -66,16 +66,16 @@ public class LibroRepository implements IGenericRepository<LibroEntity, String> 
 
     @Override
     public LibroEntity guardarLibro(LibroEntity modelo, int genero) {
-        Object[] objectUser = (Object[]) usuarioJpaRepository.crearUsuario(tipo, modelo.getNombreUs(), modelo.getApellidosUs(), modelo.getEmailUs(), modelo.getDniUs(), modelo.getImageUs(),modelo.getPassUs());
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setIdUs((String)objectUser[0]);
-        usuario.setNombreUs((String) objectUser[1]);
-        usuario.setApellidosUs((String) objectUser[2]);
-        usuario.setTipoUs(tipoUsuarioJpaRepository.findById(tipo).orElseThrow(() -> new RuntimeException("Tipo de usuario no encontrado")));
-        usuario.setEmailUs((String) objectUser[4]);
-        usuario.setDniUs((String) objectUser[5]);
-        usuario.setImageUs((String) objectUser[6]);
-        return usuario;
+        Object[] objectUser = (Object[]) libroJpaRepository.crearLibro(tipo, modelo.getNombreUs(), modelo.getApellidosUs(), modelo.getEmailUs(), modelo.getDniUs(), modelo.getImageUs(),modelo.getPassUs());
+        LibroEntity libro = new LibroEntity();
+        // libro.setIdUs((String)objectUser[0]);
+        // libro.setNombreUs((String) objectUser[1]);
+        // libro.setApellidosUs((String) objectUser[2]);
+        // libro.setTipoUs(tipoUsuarioJpaRepository.findById(tipo).orElseThrow(() -> new RuntimeException("Genero de libro no encontrado")));
+        // libro.setEmailUs((String) objectUser[4]);
+        // libro.setDniUs((String) objectUser[5]);
+        // libro.setImageUs((String) objectUser[6]);
+        return libro;
     }
 }
 
